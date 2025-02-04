@@ -1,33 +1,30 @@
+import { AppLayout } from "@/components/layouts/app.layout";
 import { RootState } from "@/store";
-import { Box, Heading } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MusicItem } from "../music/components/music-item";
-import { fetchTopMusics } from "../music/music.thunk";
+import { Playlist } from "../music/components/playlist";
+import { fetchDeezerChart } from "../music/music.thunk";
+import "./top-chart.page.scss";
 
 export function TopChartPage() {
   const dispatch = useDispatch();
 
-  const musics = useSelector((state: RootState) => state.music.musics);
+  const playlists = useSelector((state: RootState) => state.music.topPlaylists);
 
   useEffect(() => {
     const fetch = async () => {
-      dispatch(fetchTopMusics());
+      dispatch(fetchDeezerChart());
     };
     fetch();
   }, [dispatch]);
 
   return (
-    <Box p={5}>
-      <Heading as="h1" mb={5}>
-        Top Chart
-      </Heading>
-
-      <div className="space-y-4">
-        {musics.map((music) => (
-          <MusicItem key={music.id} music={music} />
+    <AppLayout className="top-chart-page">
+      <div className="top-chart-page__playlists">
+        {playlists.map((playlist) => (
+          <Playlist key={playlist.id} playlist={playlist} />
         ))}
       </div>
-    </Box>
+    </AppLayout>
   );
 }

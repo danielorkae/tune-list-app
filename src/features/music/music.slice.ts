@@ -1,43 +1,67 @@
 import { Music } from "@/app/domain/music";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchTopMusics } from "./music.thunk";
+import { Playlist } from "@/app/domain/playlist";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchDeezerChart, fetchPlaylistMusics } from "./music.thunk";
 
 interface MusicState {
-  musics: Music[];
-  loading: boolean;
+  trendingMusics: Music[];
+  topPlaylists: Playlist[];
+  loadingTrendingMusics: boolean;
+  loadingTopPlaylists: boolean;
   error?: string;
 }
 
 export const initialState: MusicState = {
-  musics: [],
-  loading: false,
+  trendingMusics: [],
+  topPlaylists: [],
+  loadingTrendingMusics: false,
+  loadingTopPlaylists: false,
 };
 
 const musicSlice = createSlice({
   name: "music",
   initialState,
-  reducers: {
-    setMusics(state, action: PayloadAction<Music[]>) {
-      state.musics = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchTopMusics.pending, (state) => {
-      state.musics = [];
-      state.loading = true;
+    builder.addCase(fetchDeezerChart.pending, (state) => {
+      state.trendingMusics = [];
+      state.topPlaylists = [];
+      state.loadingTrendingMusics = true;
     });
 
-    builder.addCase(fetchTopMusics.fulfilled, (state, action) => {
-      state.musics = action.payload;
-      state.loading = false;
+    builder.addCase(fetchDeezerChart.fulfilled, (state, action) => {
+      state.trendingMusics = action.payload.trendingMusics;
+      state.topPlaylists = action.payload.topPlaylists;
+      state.loadingTrendingMusics = false;
     });
 
-    builder.addCase(fetchTopMusics.rejected, (state, action) => {
+    builder.addCase(fetchDeezerChart.rejected, (state, action) => {
       state.error = action.error.message ?? "An error occurred";
-      state.loading = false;
+      state.loadingTrendingMusics = false;
+    });
+
+    builder.addCase(fetchPlaylistMusics.pending, (state) => {
+      state.loadingTopPlaylists = true;
+    });
+
+    builder.addCase(fetchPlaylistMusics.fulfilled, (state, action) => {
+      const playlist = state.topPlaylists.find(
+        (playlist) => playlist.id === action.payload.playlistId
+      );
+
+      if (playlist) {
+        playlist.musics = action.payload.musics;
+      }
+
+      state.loadingTopPlaylists = false;
+    });
+
+    builder.addCase(fetchPlaylistMusics.rejected, (state, action) => {
+      state.error = action.error.message ?? "An error occurred";
+      state.loadingTopPlaylists = false;
     });
   },
 });
 
-export const { setMusics } = musicSlice.actions;
+export const {} = musicSlice.actions;
 export default musicSlice.reducer;

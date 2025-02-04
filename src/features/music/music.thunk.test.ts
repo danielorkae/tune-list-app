@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { describe, expect, it, Mock, vi } from "vitest";
 import musicReducer from "./music.slice";
-import { fetchTopMusics } from "./music.thunk";
+import { fetchDeezerChart } from "./music.thunk";
 
 globalThis.fetch = vi.fn();
 
@@ -40,7 +40,7 @@ describe("fetchTopMusics", () => {
       })
     ) as Mock;
 
-    const result = await store.dispatch(fetchTopMusics());
+    const result = await store.dispatch(fetchDeezerChart());
 
     expect(result.payload).toEqual([
       { id: "1", title: "Song 1", artists: ["Artist 1"] },
@@ -53,7 +53,7 @@ describe("fetchTopMusics", () => {
       Promise.reject(new Error("API Error"))
     ) as Mock;
 
-    await store.dispatch(fetchTopMusics());
+    await store.dispatch(fetchDeezerChart());
 
     expect(store.getState().music.error).toBe("API Error");
   });

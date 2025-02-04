@@ -1,4 +1,3 @@
-import { Provider as ChakraUiProvider } from "@/components/ui/provider";
 import { Provider as StoreProvider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
@@ -7,13 +6,11 @@ import store from "./store";
 
 function App() {
   return (
-    <ChakraUiProvider>
       <StoreProvider store={store}>
         <BrowserRouter>
           <MusicRouter />
         </BrowserRouter>
       </StoreProvider>
-    </ChakraUiProvider>
   );
 }
 
