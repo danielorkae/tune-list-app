@@ -14,7 +14,7 @@ export const fetchDeezerChart = createAsyncThunk(
       }
     );
 
-    const trendingMusics = response.data.tracks.data.map((item: any) => ({
+    const trendingMusics = response.data.tracks.data.slice(0, 10).map((item: any) => ({
       id: item.id,
       title: item.title,
       artist: item.artist.name,
@@ -24,7 +24,7 @@ export const fetchDeezerChart = createAsyncThunk(
       duration: item.duration,
     }));
 
-    const topPlaylists = response.data.playlists.data.map(
+    const topPlaylists = response.data.playlists.data.slice(0, 5).map(
       (item: any): Playlist => ({
         id: item.id,
         title: item.title,
@@ -55,7 +55,7 @@ export const fetchPlaylistMusics = createAsyncThunk(
       }
     );
 
-    const musics = response.data.tracks.data.map((item: any) => ({
+    const musics = response.data.tracks.data.slice(0, 10).map((item: any) => ({
       id: item.id,
       title: item.title,
       artist: item.artist.name,
