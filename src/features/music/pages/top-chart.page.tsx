@@ -9,6 +9,15 @@ import "./top-chart.page.scss";
 
 export function TopChartPage() {
   const dispatch = useDispatch();
+  const loadingTrendingMusics = useSelector(
+    (state: RootState) => state.music.loadingTrendingMusics
+  );
+
+  const loadingPlaylists = useSelector(
+    (state: RootState) => state.music.loadingTopPlaylists
+  );
+
+  const isLoading = loadingTrendingMusics || loadingPlaylists;
 
   const trendingMusics = useSelector(
     (state: RootState) => state.music.trendingMusics
@@ -16,16 +25,14 @@ export function TopChartPage() {
   const playlists = useSelector((state: RootState) => state.music.topPlaylists);
 
   useEffect(() => {
-    const fetch = async () => {
+    if (!isLoading && (trendingMusics.length === 0 || playlists.length === 0)) {
       dispatch(fetchDeezerChart());
-    };
-    fetch();
-  }, [dispatch]);
+    }
+  }, [dispatch, trendingMusics, playlists, isLoading]);
 
   return (
     <AppLayout className="top-chart-page">
       <TrendingMusics musics={trendingMusics} />
-
       <div className="top-chart-page__playlists">
         {playlists.map((playlist) => (
           <Playlist key={playlist.id} playlist={playlist} />
