@@ -1,5 +1,5 @@
 import { Music } from "@/app/domain/music";
-import { Avatar } from "@chakra-ui/react";
+import { Avatar, Button } from "@chakra-ui/react";
 import { HeartIcon, User2Icon } from "lucide-react";
 import { useState } from "react"; // Importado useState
 import "./music-item.scss";
@@ -24,11 +24,15 @@ export function MusicItem({ music }: MusicItemProps) {
           <User2Icon size="1em" /> {music.artist}
         </div>
       </div>
-      <HeartIcon
-        className={`music-item__favorite ${isFavorited ? 'music-item__favorite--favorited' : ''}`}
-        size="1.5em"
-        onClick={toggleFavorite} 
-      />
+      <Button
+        className={`music-item__favorite`}
+        variant="ghost"
+      >
+        <HeartIcon
+          className={`music-item__favorite__icon ${isFavorited ? 'music-item__favorite__icon--favorited' : ''}`}
+          onClick={toggleFavorite} 
+        />
+      </Button>
     </div>
   );
 }

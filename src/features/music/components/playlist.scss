@@ -1,9 +1,15 @@
 .playlist {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
+  width: 280px;
 
   &__title {
     color: #fcfcff;
+    margin-bottom: 1em;
+  }
+
+  &__musics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.5em;
+    overflow-x: auto;
   }
 }

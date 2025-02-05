@@ -1,9 +1,13 @@
 .music-item {
-  display: flex;
-  gap: 0.5em;
-  align-items: center; // Adicionado para alinhar o botão de favoritar
+  display: grid;
+  grid-template-columns: 64px 1fr 50px;
+  gap: 1em;
+  align-items: center;
 
   &__cover {
+    width: 64px;
+    height: 64px;
+
     img {
       width: 100%;
       height: 100%;
@@ -36,10 +40,24 @@
   &__favorite {
     margin-left: auto;
     cursor: pointer;
-    color: #fcfcff;
+    padding: 0 !important;
 
-    &--favorited {
-      color: #ff0000; // Cor para o estado favoritado
+    &:hover {
+      outline: none !important;
+      background-color: transparent !important;
+    }
+
+    &:active {
+      outline: none !important;
+      background-color: transparent !important;
+    }
+
+    &__icon {
+      color: #fcfcff;
+
+      &--favorited {
+        color: #ff0000;
+      }
     }
   }
 }

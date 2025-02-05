@@ -10,9 +10,11 @@ export function Playlist({ playlist }: { playlist: PlaylistType }) {
         {playlist.title}
       </Heading>
 
-      {playlist.musics.map((music) => (
-        <MusicItem key={music.id} music={music} />
-      ))}
+      <div className="playlist__musics">
+        {playlist.musics.map((music) => (
+          <MusicItem key={music.id} music={music} />
+        ))}
+      </div>
     </div>
   );
 }

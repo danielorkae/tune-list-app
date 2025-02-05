@@ -1,17 +1,18 @@
 .top-chart-page {
   background-color: #2d2e37;
   padding: 1em;
+  padding-top: 3em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
-
-  &__title {
-    color: #fcfcff;
-    font-size: 2em;
-  }
+  gap: 2em;
 
   &__playlists {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(auto-fill, 280px);
+    gap: 1em;
     overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
   }
 }
