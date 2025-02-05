@@ -2,8 +2,8 @@ import { AppLayout } from "@/components/layouts/app.layout";
 import { RootState } from "@/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Playlist } from "../music/components/playlist";
-import { fetchDeezerChart } from "../music/music.thunk";
+import { Playlist } from "../components/playlist";
+import { fetchDeezerChart } from "../music.thunk";
 import "./top-chart.page.scss";
 
 export function TopChartPage() {
