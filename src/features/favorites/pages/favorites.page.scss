@@ -1,0 +1,20 @@
+.favorites-page {
+  padding: 1em;
+
+  &__title {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #fcfcff;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+  }
+
+  &__empty {
+    font-size: 0.9em;
+    color: #c4c4c4;
+  }
+}

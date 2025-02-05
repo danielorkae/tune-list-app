@@ -4,7 +4,7 @@ import { TopChartPage } from "./pages/top-chart.page";
 export function MusicRouter() {
   return (
     <Routes>
-      <Route path="/top" element={<TopChartPage />} />
+      <Route path="/" element={<TopChartPage />} />
     </Routes>
   );
 }

@@ -1,3 +1,4 @@
+import { Navbar } from "../navbar";
 import "./app.layout.scss";
 
 export function AppLayout({
@@ -5,7 +6,12 @@ export function AppLayout({
   className,
 }: {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }) {
-  return <main className={`app-layout ${className}`}>{children}</main>;
+  return (
+    <main className={`app-layout ${className}`}>
+      {children}
+      <Navbar />
+    </main>
+  );
 }
