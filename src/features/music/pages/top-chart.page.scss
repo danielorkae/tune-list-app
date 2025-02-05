@@ -1,5 +1,14 @@
 .top-chart-page {
   background-color: #2d2e37;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  &__title {
+    color: #fcfcff;
+    font-size: 2em;
+  }
 
   &__playlists {
     display: flex;

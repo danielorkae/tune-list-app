@@ -3,12 +3,17 @@ import { RootState } from "@/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Playlist } from "../components/playlist";
+import { SearchBar } from "../components/search-bar";
+import { TrendingMusics } from "../components/trending-musics";
 import { fetchDeezerChart } from "../music.thunk";
 import "./top-chart.page.scss";
 
 export function TopChartPage() {
   const dispatch = useDispatch();
 
+  const trendingMusics = useSelector(
+    (state: RootState) => state.music.trendingMusics
+  );
   const playlists = useSelector((state: RootState) => state.music.topPlaylists);
 
   useEffect(() => {
@@ -20,6 +25,12 @@ export function TopChartPage() {
 
   return (
     <AppLayout className="top-chart-page">
+      <div className="top-chart-page__search">
+        <SearchBar />
+      </div>
+
+      <TrendingMusics musics={trendingMusics} />
+
       <div className="top-chart-page__playlists">
         {playlists.map((playlist) => (
           <Playlist key={playlist.id} playlist={playlist} />

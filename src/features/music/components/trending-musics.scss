@@ -1,0 +1,74 @@
+.trending-musics {
+  &__title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #fcfcff;
+  }
+
+  &__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    overflow-x: auto;
+  }
+
+  &__item {
+    position: relative;
+    color: #fcfcff;
+    width: 280px;
+    height: 200px;
+    background-size: cover;
+    border-radius: 20px;
+
+    &__overlay {
+      position: absolute;
+      bottom: 0;
+      background-color: #3c3abeef;
+      border-radius: 20px;
+      margin: 10px;
+      padding: 1em 1.2em;
+      width: calc(100% - 20px);
+      display: grid;
+      grid-template-columns: calc(100% - 50px) 40px;
+      gap: 1rem;
+    }
+
+    &__info {
+      width: 100%;
+
+      span {
+        font-size: 0.9em;
+        color: #fcfcff;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+
+    &__title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fcfcff;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    &__play {
+      color: #3c3abe;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background-color: #fcfcff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50% !important;
+      padding: 0.75em !important;
+    }
+  }
+}
