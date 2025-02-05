@@ -1,20 +1,19 @@
 import { Music } from "@/app/domain/music";
 import { Avatar, Button } from "@chakra-ui/react";
 import { HeartIcon, User2Icon } from "lucide-react";
-import { useState } from "react"; // Importado useState
 import "./music-item.scss";
 
 type MusicItemProps = {
   music: Music;
+  isFavorite: boolean;
+  onFavoriteClick: (music: Music) => void;
 };
 
-export function MusicItem({ music }: MusicItemProps) {
-  const [isFavorited, setIsFavorited] = useState(false); // Estado para controle de favoritar
-
-  const toggleFavorite = () => {
-    setIsFavorited(!isFavorited);
-  };
-
+export function MusicItem({ music, isFavorite, onFavoriteClick }: MusicItemProps) {
+  const favoriteClickHandler = () => {
+    onFavoriteClick(music);
+  }
+  
   return (
     <div className="music-item">
       <Avatar className="music-item__cover" src={music.cover} rounded={'sm'} size="lg" />
@@ -27,10 +26,10 @@ export function MusicItem({ music }: MusicItemProps) {
       <Button
         className={`music-item__favorite`}
         variant="ghost"
+        onClick={() => favoriteClickHandler()} 
       >
         <HeartIcon
-          className={`music-item__favorite__icon ${isFavorited ? 'music-item__favorite__icon--favorited' : ''}`}
-          onClick={toggleFavorite} 
+          className={`music-item__favorite__icon ${isFavorite ? 'music-item__favorite__icon--favorited' : ''}`}
         />
       </Button>
     </div>

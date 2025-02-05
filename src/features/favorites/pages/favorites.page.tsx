@@ -1,14 +1,22 @@
+import { Music } from "@/app/domain/music";
 import { AppLayout } from "@/components/layouts/app.layout";
 import { MusicItem } from "@/features/music/components/music-item";
 import { RootState } from "@/store";
 import { Heading } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFavorite } from "../favorites.slice";
 import "./favorites.page.scss";
 
 export function FavoritesPage() {
+  const dispatch = useDispatch();
+
   const favorites = useSelector(
     (state: RootState) => state.favorites.favorites
   );
+
+  const onFavoriteClickHandler = (music: Music) => {
+    dispatch(removeFavorite(music));
+  };
 
   return (
     <AppLayout className="favorites-page">
@@ -18,8 +26,13 @@ export function FavoritesPage() {
         {favorites.length === 0 && (
           <p className="favorites-page__empty">Nenhuma música favorita</p>
         )}
+
         {favorites.map((favorite) => (
-          <MusicItem music={favorite} />
+          <MusicItem
+            music={favorite}
+            isFavorite={true}
+            onFavoriteClick={onFavoriteClickHandler}
+          />
         ))}
       </div>
     </AppLayout>
